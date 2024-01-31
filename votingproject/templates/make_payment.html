@@ -1,0 +1,120 @@
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
+<section class="pb-4">
+	<div class="bg-white border rounded-5">
+	  
+	  <section class="w-100 p-4 d-flex justify-content-center pb-4">
+
+			<transaction> <span style="font-size: 30px;"> You are about to pay ₦{{ payment.amount }} </span><br> Transaction reference no: {{ payment.ref }}</p>
+
+			<button onclick="payWithPaystack()" class="btn btn-primary btn-block mb-4">Pay</button>
+		</section>
+    </div>
+  </div>
+</section>
+
+
+<script>
+	function payWithPaystack() {
+		let currency = "NGN";
+		let plan = "";
+		let ref = "{{ payment.ref }}";
+		let amount = "{{ payment.amount }}";
+		let obj = {
+			key: "{{ paystack_pub_key }}",
+			email: "{{ payment.email }}",
+			amount: "{{ amount_value }}",
+			ref: ref,
+			callback: function (response) {
+				window.location.href = "{% url 'verify_payment' payment.ref %}";
+			},
+		};
+		if (Boolean(currency)) {
+			obj.currency = currency.toUpperCase();
+		}
+		if (Boolean(plan)) {
+			obj.plan - plan;
+		}
+
+		var handler = PaystackPop.setup(obj);
+		handler.openIframe();
+	}
+</script>
+
+
+
+
+
+
+{% comment %} <div class="container">
+    <div class="col-12">
+        <h5>Make Payment for: £ {{payment.amount}}</h5>
+        <hr>
+        <form action=""  id="paymentForm">
+            <script src="https://js.paystack.co/v1/inline.js"></script>
+            <button type="submit" class="btn btn-large btn-success" onclick="payWithPaystack()" id="django-paystack-button">Make Payment</button>
+            <div class="form-submit">
+                <button type="submit" onclick="payWithPaystack()"> Pay </button>
+              </div>
+        </form>   
+    </div>
+</div> 
+
+<script>
+    function payWithPaystack(){
+        let currency = "NGN";
+        let plan = "";
+        let ref = "{{payment.ref}}";
+        let obj = {
+            key: "{{ paystack_public_key }}",
+            email: "{{ payment.email }}",
+            amount: "{{ payment.amount_value }}",
+            ref : ref,
+            callback: function(response) {
+                window.location.href = "{% url 'verify-payment' payment.ref %}";
+
+        }
+    }
+    if (Boolean(currency)){
+        obj.currency = currency.toUpperCase(); 
+    }
+    if (Boolean(plan)){
+        obj.plan = plan;
+    }    
+    var handler = paystackPop.setup(obj);
+    handler.openIframe();
+    
+}
+</script> {% endcomment %}
+
+<!-- 
+<script>
+    const paymentForm = document.getElementById('paymentForm');
+paymentForm.addEventListener("submit", payWithPaystack, false);
+
+function payWithPaystack(e) {
+  e.preventDefault();
+
+  let handler = PaystackPop.setup({
+    key: 'pk_test_c981f0a3470d713ef6a7b7fd8b3fbeee14b8002e', // Replace with your public key
+    email: document.getElementById("email-address").value,
+    amount: document.getElementById("amount").value * 100,
+    ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+    // label: "Optional string that replaces customer email"
+    onClose: function(){
+      alert('Window closed.');
+    },
+    callback: function(response){
+      let message = 'Payment complete! Reference: ' + response.reference;
+      alert(message);
+    }
+  });
+
+  handler.openIframe();
+}
+</script> -->

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% extends 'header.html' %}
+{% load static %}
+<html lang="en">
+    
+    {% block content %}
+    <body>
+        <!-- Navigation-->
+       
+        <!-- Header-->
+       
+        <!-- Section-->
+        
+    <div class="container" style="height: max-content;  width: 100%!important;">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center" style="width: 50%; margin: auto; height:auto;">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4" style="font-weight: bold; font-size: 20px;">Add Candidate</h1>
+                                    </div>
+                                    <form method="post" action="{%url 'create-candidate' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                          <label for="name">Full Name:</label>
+                                          <input type="text" class="form-control form-control-user" name="name" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="bio">Bio:</label>
+                                          <textarea class="form-control form-control-user" name="bio" required></textarea><br>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="voting_category">Select Voting Category:</label>
+                                         <select class="form-control form-control-user" name="voting_category" required>
+                                          {% for category in voting_categories %}
+                                            <option value="{{ category.id }}">{{ category.name }}</option>
+                                          {% endfor %}
+                                         </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="candidate_image">Candidate Image:</label>
+                                          <input type="file" class="form-control form-control-user" name="candidate_image" required><br>
+                                        </div>
+
+                                        <div class="form-group"  style="width: 70%; margin: auto; margin-left: 35%;">
+                                            <!-- <input type="submit" value="Login" class="btn btn-primary btn-user btn-block" style="font-size: 18px; width: 40%; margin: auto;"> -->
+                                            <button type="submit" class="btn btn-primary btn-user btn-block" style="font-size: 18px; width: 40%; margin: auto;">Save</button>
+                                        </div>
+
+                                        <!-- <button type="submit" class="form-control form-control-user">Save</button> -->
+                                      </form>
+                                   
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+     
+        <!-- Footer-->
+        {% include 'footer.html' %}
+        
+       
+    </body>
+    {% endblock content %}
+</html>
+
+
+

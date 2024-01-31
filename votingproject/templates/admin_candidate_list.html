@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container" style="margin-bottom: 5%;">
+    <h2>Candidate List</h2>
+
+    {% for category, candidates in categories_with_candidates %}
+      <div class="category-section">
+        <h4>{{ category.name }} Candidates</h4>
+        
+        {% if candidates %}
+          <ul>
+            {% for candidate in candidates %}
+              <li>
+                <h6>{{ candidate.name }}</h6>
+                
+                <span style="font-weight: bolder;">{{ candidate.votes_count }}</span> Votes
+                <a class="btn btn-danger btn-sm" style="margin-left: 10px;" href="{% url 'delete-candidate' candidate.id %}" onclick="return confirm('Are you sure you want to delete this candidate?')">Delete</a>
+                <br>
+              </li>
+              <br>
+              <!-- Add other candidate information as needed -->
+            {% endfor %}
+            <hr>
+          </ul>
+        {% else %}
+          <p>No candidates found for this category.</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    
+  </div>
+  {% include 'footer.html' %}
+{% endblock %}
+
+
+
+

@@ -1,0 +1,12 @@
+<!-- voting/dashboard.html -->
+<h2>Voting Categories</h2>
+{% for category in categories %}
+  <img src="{{ category.image.url }}" alt="{{ category.name }}">
+  <a href="{% url 'candidate_list' category.id %}">{{ category.name }}</a><br>
+{% endfor %}
+
+<h2>All Candidates</h2>
+{% for candidate in candidates %}
+  <img src="{{ candidate.image.url }}" alt="{{ candidate.name }}">
+  <a href="{% url 'vote' candidate.id %}">{{ candidate.name }}</a><br>
+{% endfor %}

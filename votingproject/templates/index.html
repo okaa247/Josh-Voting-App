@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends 'header.html' %}
+{% load static %}
+<html lang="en">
+    
+    {% block content %}
+    <body>
+        <!-- Navigation-->
+       
+        <!-- Header-->
+        <header class="bg-dark py-5 myown" style="background-image: url(https://www.eballot.com/hubfs/poll.png)!important; 
+        background-repeat: no-repeat; background-position: center; background-size: cover; height: 450px !important; margin-bottom: -30px!important;">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder" style="color: #d60d0da1;">Vote in style</h1>
+                    <p class="lead fw-normal text-white-50 mb-0" style="color: #b10c0cf8!important;">Josh vote, where your vote counts!</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+
+            <div class="container px-4 px-lg-5 mt-5">
+                {% for category, candidates in global_list %}
+                <h3 style="text-align: center; margin-bottom: 15px;">{{ category.name }} Candidates</h3>
+                
+                <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
+                    {% for candidate in candidates %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem; padding: 10px; font-size: large;">{{ candidate.votes_count }} Votes</div>
+                            <!-- Product image-->
+                            
+                            {% comment %} <img class="card-img-top" src="{% static './img/IMG_20230618_143617.jpg' %}" style="height: 225px; max-width: 100%;" alt="..." /> {% endcomment %}
+                            <img class="card-img-top" src="{{ candidate.candidate_image.url}}" style="height: 225px; max-width: 100%;" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ candidate.name }}</h5>
+                                    <!-- Product price-->
+                                    <p>{{ candidate.bio }}</p>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'candidate-list' %}">Go Vote</a></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+            
+        </section>
+        <!-- Footer-->
+        {% include 'footer.html' %}
+        
+       
+    </body>
+    {% endblock content %}
+</html>
+
+

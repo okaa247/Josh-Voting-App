@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <h2>Delete Candidate</h2>
+    <p>Are you sure you want to delete the candidate <span style="font-weight: bolder;">"{{ candidate.name }}"?</span> </p>
+
+    <form method="post" action="{% url 'delete-candidate' candidate.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-user btn-block" style="font-size: 18px; width: 10%; margin: auto;">Yes, delete</button>
+        <a class="btn btn-success btn-user btn-block" style="font-size: 18px; width: 10%; margin: auto;" href="{% url 'admin-candidate-list' %}">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

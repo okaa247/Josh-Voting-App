@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% extends 'header.html' %}
+{% load static %}
+<html lang="en">
+    
+    {% block content %}
+    <body>
+        <style>
+            .mt-2 {
+            margin-top: 0.3rem!important;
+            width: 50%;
+            margin: auto;
+            text-align: center;
+            font-size: 15px;
+        }
+        </style>
+        <!-- Navigation-->
+       
+        <!-- Header-->
+       
+        <!-- Section-->
+        
+    <div class="container" style="margin-bottom: 10%!important; ">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center" style="width: 70%; margin: auto;">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    {% if messages  %}
+                <div class="messages mt-2">
+                    {% for message in messages %}
+                    {% if message.tags %}
+                    <div class="alert {{message.tags}}" role="alert">
+                        {{message}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4" style="font-weight: bold; font-size: 20px;">Create Voting Category</h1>
+                                    </div>
+                                    <form class="user" method="post" action="{% url 'votingcategory-create' %}">
+                                        {% csrf_token %}
+                                     
+                                        <div class="form-group" style="margin-bottom: 20px;">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="name" name="name" placeholder="Enter Category Name..." style="width: 50%; margin-left: 25%; font-size: 15px;">
+                                        </div>
+                                       
+                                        <div class="form-group"  style="width: 70%; margin: auto; margin-left: 35%;">
+                                            <input type="submit" value="Save" class="btn btn-primary btn-user btn-block " style="font-size: 18px; width: 40%; margin: auto;">
+                                        </div>
+                                        
+                                    </form>
+
+                                    <hr>
+                                    
+                                    <div class="text-center">
+                                        <a class="lg fw-bold" href="{%url 'votingcategory-list' %}">See Categories</a>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+     
+        <!-- Footer-->
+        {% include 'footer.html' %}
+        
+       
+    </body>
+    {% endblock content %}
+</html>
+
+
+
+
+
