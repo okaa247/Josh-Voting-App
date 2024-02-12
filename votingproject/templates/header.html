@@ -66,12 +66,9 @@
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="{%url 'create-candidate' %}">Add Candidate</a></li>
                                 <li><a class="dropdown-item" href="{%url 'admin-candidate-list' %}">Candidates</a></li>
-                                
                             </ul>
                         </li>
                         {% endif %}
-                        
-                        {% comment %} <li class="nav-item"><a class="nav-link" href="{%url 'candidate-list' category_slug=category.slug %}">SignUp</a></li> {% endcomment %}
                         
                     </ul>
 
@@ -79,8 +76,6 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-
-                        <!-- Nav Item - User Information -->
                         {% if request.user.is_authenticated %}
                         <ul class="nav-item dropdown no-arrow" style="margin-left: 40%;">
                 
@@ -94,16 +89,11 @@
                                     {% endif %}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    
                                     <li><a class="dropdown-item" href="{% url 'profilepage' %}">Profile</a></li>
                                     <li><hr class="dropdown-divider" /></li>
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                                   
                                 </ul>
-                            <!-- </li> -->
                             
-
-                           
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 
@@ -124,8 +114,6 @@
 
         {% endblock content %}
        
-        
-        <!-- Footer-->
        
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -133,9 +121,16 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        {% block extra_head %}{% endblock %}
-
-
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(function () {
+                    var messages = document.querySelectorAll('.alert');
+                    messages.forEach(function (message) {
+                        message.style.display = 'none';
+                    });
+                }, 3000);  // 3000 milliseconds (3 seconds)
+            });
+        </script>
 
         <!-- Core theme JS-->
         <script src="{% static 'js/scripts.js' %}"></script>
